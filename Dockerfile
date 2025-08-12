@@ -1,4 +1,4 @@
-FROM php:7.2-apache
+FROM php:8.2-fpm
 
 WORKDIR /var/www/html
 
@@ -15,20 +15,11 @@ COPY . .
 USER root
 
 RUN npm install
-
 RUN composer install
 
-RUN mkdir -p /var/www/html/public/build
+RUN mkdir -p var/log var/cache public/build
 RUN chown -R www-data:www-data /var/www
 
 RUN npm run build
 
-COPY ./000-default.conf /etc/apache2/sites-available/
-
-RUN a2enmod rewrite
-
-RUN service apache2 restart
-
-USER www-data
-
-EXPOSE 80 443
+CMD ["php-fpm", "-F"]
