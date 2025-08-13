@@ -33,7 +33,10 @@ Symfony + React.js application with NGINX as FastCGI proxy for PHP-FPM
 - pre-rendering ??
 
 # Pre-rendering
-"Można zapisać do .html zubdowane oraz wyrenderowane szablon (Twig) i komponenty React.js (Webpack Encore) przez Symfony i serwować w NGINX jako statyczne strony i przebudowywać tylko przy aktualizacji kursu"
+"Można zapisać do .html zubdowane oraz wyrenderowane przez Symfony
+szablon (Twig) i komponenty React.js (Webpack Encore).
+A następnie serwować je przez NGINX jako statyczne strony i przebudowywać
+tylko przy aktualizacji kursu"
 
 # Obsługiwane waluty
 - Kantor obsługuje waluty:
