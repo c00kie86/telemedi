@@ -1,4 +1,4 @@
-// ./assets/js/components/Users.js
+// ./assets/js/components/SetupCheck.js
 
 import React, {Component} from 'react';
 import axios from 'axios';
