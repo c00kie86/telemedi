@@ -4,9 +4,9 @@
 	"effectiveDate": "2025-08-12",
 	"rates": [
 		{
-			"currency": "dolar amerykański",
-			"code": "USD",
-			"mid": 3.65,
+			"currency": "euro",
+			"code": "EUR",
+			"mid": 4.2626,
 			"sell": 3.76,
 			"buy": 3.5
 		}
