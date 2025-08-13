@@ -8,6 +8,7 @@ services:
       - ./assets:/var/www/html/assets
       - ./bin:/var/www/html/bin
       - ./config:/var/www/html/config
+      - ./data:/var/www/html/data
       - public:/var/www/html/public
       - ./src:/var/www/html/src
       - ./templates:/var/www/html/templates
