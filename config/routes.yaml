@@ -6,7 +6,11 @@
 
 setupcheck:
     path: /api/setup-check
-    controller: App\Controller\DefaultController::setupCheck
+    controller: App\Controller\Api\SetupCheckController::setupCheck
+
+getcurrency:
+    path: /api/currency
+    controller: App\Controller\Api\CurrencyController::getCurrency
 
 index:
     path: /{wildcard}
