@@ -1,36 +1,42 @@
-# Currency Exchange Table
-Symfony + React.js application with NGINX as FastCGI proxy for PHP-FPM
+<!-- title -->
+<h1 align="center">&#8364;Kantorek</h1>
+
+<!-- background -->
+<div align="center">
+  <img src="assets/img/ekantorek.png" alt="background" />
+</div>
+
+<h2 align="center">Symfony + React.js application with NGINX as FastCGI proxy for PHP-FPM</h2>
 
 ### Info
 ```bash
 # Tabela wymiany walut
-- Czytelny i funkcjonalny interfejs do prezentacja danych dla pracowników kantoru wymiany walut
+- Czytelny i funkcjonalny interfejs do prezentacji danych dla pracowników kantoru wymiany walut
 
 # Frontend
-1. Aktualne Kursy
+1. Nagłówek
+- Baner .svg 
+
+2. Aktualne Kursy
 - Listy bieżących kursów sprzedawanych walut:
   - Kod waluty
   - Nazwa waluty
-  - Średni kurs
   - Kurs sprzedaży
-  - Kurs kupna (jeżli dotyczy)
-  - Edycja waluty ???
-
-2. Dodaj walutę
-- Pole dodania waluty
-  - Określ kod waluty, różnicę sprzedaży oraz różnice kupna jeżeli dotyczy
-  - Waluta zostanie dodana do sekcji Aktualne Kursy
+  - Kurs kupna
+  - Średni kurs
 
 3. Kurs historyczny
-- Lista ostatnich 14 kursów danej waluty od podanej daty (domyślnie: USD, aktualna data)
-- Pole wyboru (wybierz: walute, datę)
+- Pole wyboru waluty i daty
+- Lista ostatnich 14 kursów (domyślnie: USD, aktualny kurs)
 
 # Backend
-- Dane w aplikacji pobierane z API Symfony (API platform v2.6.x)
+- Dane w aplikacji pobierane z API Symfony (API platform v2.6.x ???)
 - Dane w API Symfony pobrane z API NBP
-- Dane z API NBP zapisane w pliku .json
-- Dane z pliku przeliczone i wystawoine w Symfony API
-- pre-rendering ??
+- Dane z API NBP przeliczone i zapisane do pliku data/file.json  
+- API wystawione na podstawie danych z plioku Symfony API
+
+# Etag
+- Nowy Etag w Symfony przekazany do NGINXa wymusza na kliencie po walidaci pre-requesta pobranie nowych danych
 
 # Pre-rendering
 "Można zapisać do .html zubdowane oraz wyrenderowane przez Symfony
@@ -55,6 +61,8 @@ kantor nie skupuje tych walut (brak kursu kupna)
 - Brak danych z NBP
 - Nieobsługiwana waluta
 - Niepoprawna data
+
+# Testy
 
 # Jak uruchomić aplikacje?
 - Zapoznaj się z poniższymi wytycznymi
@@ -177,8 +185,42 @@ request >> NGINX >> PHP-FPM >> Symfony >> response # .php
 
 ### Endpoints
 ```bash
+# routes
 http://localhost
-http://localhost/setup-check
+http://localhost/setup-check # Test
 
-http://localhost/api/setup-check
+# api/currency
+http://localhost/api/currency?code=USD
+http://localhost/api/currency?code=USD
+
+# api/date
+http://localhost/api/date?date=2025-08-14&code=USD
+http://localhost/api/date?date=2025-08-13&code=USD
+http://localhost/api/setup-check # Test
+```
+
+### Command
+```bash
+# Budowanie aplikacji
+npm run build
+
+# Czyszenie cache
+php bin/console cache:clear
+
+# Dump plików w danym katalogu
+php bin/console app:dump-file-content src/App
+php bin/console app:dump-file-content assets/js
+
+# Pobiera aktualną tabele
+php bin/console nbp:fetch-daily-rates
+
+# Pobiera tabele z kursami z danego dnia
+php bin/console nbp:fetch-rates A data/date/2025-08-10.json 2025-08-10
+
+# Pobiera przeliczone waluty
+php bin/console nbp:fetch-calculated-rates
+
+# Pobiera przeliczone waluty
+php bin/console nbp:calculate-rates
+
 ```
