@@ -81,7 +81,9 @@ kantor nie skupuje tych walut (brak kursu kupna)
 - Zrób klona repozytorium
 - Uruchom kontenery przez docker compose
 - Zbudowana aplikacja będzie dostępna pod http://localhost
-- Zapoznaj się z poniższymi wytycznymi
+- Komendy nbp: nie są wywoływane przez CRONa więc dane z repo bedą nieaktualne
+- Wejdź na kontener symfony jeżeli chcesz pobrać dane przez komendy nbp:, a następnie przebuduj aplikacje
+- Zapoznaj się z poniższymi wytycznymi...
 ```
 
 ### Git config
