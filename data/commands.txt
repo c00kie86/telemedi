@@ -1,0 +1,26 @@
+# Budowanie aplikacji
+npm run build
+
+# Lista komend
+php bin/console list
+
+# Lista endpointów
+php bin/console debug:router
+
+# Czyszczenie cache
+php bin/console cache:clear
+php bin/console cache:clear --env=dev
+php bin/console cache:clear --env=prod
+
+# Zrzut zawartości wszystkich plików z podanego katalogu
+php bin/console config:dump-file-content src/App
+php bin/console config:dump-file-content assets/js
+
+# Pobiera aktualne kursy walut, przelicza i zapisuje do plikó
+php bin/console nbp:fetch-latest-currency-rates
+
+# Pobiera aktualną tabele z kursami walut z NBP, przelicza i zapisuje do plików
+php bin/console nbp:fetch-latest-rates
+
+# Pobiera tabele z kursami z danego dnia, przelicza i zapisuje do pliku [tabela, path, date]
+php bin/console fetch-rate-by-date A data/date/2025-08-15.json 2025-08-15

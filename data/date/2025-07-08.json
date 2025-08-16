@@ -1,0 +1,179 @@
+{
+    "table": "A",
+    "no": "130/A/NBP/2025",
+    "effectiveDate": "2025-07-08",
+    "rates": [
+        {
+            "code": "THB",
+            "currency": "bat (Tajlandia)",
+            "mid": 0.1111
+        },
+        {
+            "code": "USD",
+            "currency": "dolar amerykański",
+            "mid": 3.6135,
+            "buy": 3.46,
+            "sell": 3.72
+        },
+        {
+            "code": "AUD",
+            "currency": "dolar australijski",
+            "mid": 2.3637
+        },
+        {
+            "code": "HKD",
+            "currency": "dolar Hongkongu",
+            "mid": 0.4603
+        },
+        {
+            "code": "CAD",
+            "currency": "dolar kanadyjski",
+            "mid": 2.6481
+        },
+        {
+            "code": "NZD",
+            "currency": "dolar nowozelandzki",
+            "mid": 2.1751
+        },
+        {
+            "code": "SGD",
+            "currency": "dolar singapurski",
+            "mid": 2.8271
+        },
+        {
+            "code": "EUR",
+            "currency": "euro",
+            "mid": 4.2455,
+            "buy": 4.1,
+            "sell": 4.36
+        },
+        {
+            "code": "HUF",
+            "currency": "forint (Węgry)",
+            "mid": 0.010628
+        },
+        {
+            "code": "CHF",
+            "currency": "frank szwajcarski",
+            "mid": 4.537
+        },
+        {
+            "code": "GBP",
+            "currency": "funt szterling",
+            "mid": 4.9189
+        },
+        {
+            "code": "UAH",
+            "currency": "hrywna (Ukraina)",
+            "mid": 0.0863
+        },
+        {
+            "code": "JPY",
+            "currency": "jen (Japonia)",
+            "mid": 0.024717
+        },
+        {
+            "code": "CZK",
+            "currency": "korona czeska",
+            "mid": 0.1722,
+            "sell": 0.37
+        },
+        {
+            "code": "DKK",
+            "currency": "korona duńska",
+            "mid": 0.5691
+        },
+        {
+            "code": "ISK",
+            "currency": "korona islandzka",
+            "mid": 0.029772
+        },
+        {
+            "code": "NOK",
+            "currency": "korona norweska",
+            "mid": 0.359
+        },
+        {
+            "code": "SEK",
+            "currency": "korona szwedzka",
+            "mid": 0.3806
+        },
+        {
+            "code": "RON",
+            "currency": "lej rumuński",
+            "mid": 0.8376
+        },
+        {
+            "code": "BGN",
+            "currency": "lew (Bułgaria)",
+            "mid": 2.1707
+        },
+        {
+            "code": "TRY",
+            "currency": "lira turecka",
+            "mid": 0.0902
+        },
+        {
+            "code": "ILS",
+            "currency": "nowy izraelski szekel",
+            "mid": 1.0771
+        },
+        {
+            "code": "CLP",
+            "currency": "peso chilijskie",
+            "mid": 0.003832
+        },
+        {
+            "code": "PHP",
+            "currency": "peso filipińskie",
+            "mid": 0.0641
+        },
+        {
+            "code": "MXN",
+            "currency": "peso meksykańskie",
+            "mid": 0.194
+        },
+        {
+            "code": "ZAR",
+            "currency": "rand (Republika Południowej Afryki)",
+            "mid": 0.2031
+        },
+        {
+            "code": "BRL",
+            "currency": "real (Brazylia)",
+            "mid": 0.6584,
+            "sell": 0.86
+        },
+        {
+            "code": "MYR",
+            "currency": "ringgit (Malezja)",
+            "mid": 0.8517
+        },
+        {
+            "code": "IDR",
+            "currency": "rupia indonezyjska",
+            "mid": 0.00022299,
+            "sell": 0.2
+        },
+        {
+            "code": "INR",
+            "currency": "rupia indyjska",
+            "mid": 0.042142
+        },
+        {
+            "code": "KRW",
+            "currency": "won południowokoreański",
+            "mid": 0.002641
+        },
+        {
+            "code": "CNY",
+            "currency": "yuan renminbi (Chiny)",
+            "mid": 0.5037
+        },
+        {
+            "code": "XDR",
+            "currency": "SDR (MFW)",
+            "mid": 4.9671
+        }
+    ]
+}

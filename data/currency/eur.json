@@ -1,14 +1,7 @@
 {
-	"table": "A",
-	"no": "155/A/NBP/2025",
-	"effectiveDate": "2025-08-12",
-	"rates": [
-		{
-			"currency": "euro",
-			"code": "EUR",
-			"mid": 4.2626,
-			"sell": 3.76,
-			"buy": 3.5
-		}
-	]
+    "code": "EUR",
+    "currency": "euro",
+    "mid": 4.2639,
+    "buy": 4.11,
+    "sell": 4.37
 }
