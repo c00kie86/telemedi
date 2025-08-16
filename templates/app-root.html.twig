@@ -2,11 +2,10 @@
 
 {% extends 'base.html.twig' %}
 
- {% block title %} Telemedi Zadanie {% endblock %}
+{% block title %} Tabela wymiany walut | EKantorek {% endblock %}
+{% block description %} Czytelny i funkcjonalny interfejs do prezentacji danych dla pracowników kantoru wymiany walut {% endblock %}
 
- {% block body %}
-
-     <!-- React Root element -->
-     <div id="root"></div>
-
- {% endblock %}
+{% block body %}
+    <!-- React Root element -->
+    <div id="root" data-currency-codes="{{ currency_codes }}"></div>
+{% endblock %}
