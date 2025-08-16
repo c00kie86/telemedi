@@ -1,3 +1,68 @@
+html {
+  display: block;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  color-scheme: light dark;
+}
+
 body {
-    background-color: lightgray;
+  color: #000;
+  background-color: #fff;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+}
+
+.ubuntu-regular {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.ubuntu-bold {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.pt-16 {
+    padding-top: 64px;
+}
+
+.rounded-4xl {
+  border-radius: 32px;
+}
+
+.bg-turbo {
+  background-color: #eef6ff;
+}
+
+.fill-turbo {
+ fill: #eef6ff;
+}
+
+.table-hover tbody tr:hover td {
+  background-color: #000;
+  color: #fff;
+}
+
+.tech-icon {
+  display: flex;
+  min-width: 24px;
+  max-width: 64px;
+  height: auto;
+}
+
+button:hover {
+  transform: scale(1.1);
+  transition: transform 0.1s ease-in-out;
+}
+
+.tech-icon:hover {
+  filter: brightness(0) saturate(100%) invert(35%) sepia(100%) saturate(747%) hue-rotate(187deg) brightness(100%) contrast(100%);
+  transform: scale(1.1);
+  transition: transform 0.1s ease-in-out, filter 0.1s ease-in-out;
 }
