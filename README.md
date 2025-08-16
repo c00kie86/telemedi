@@ -10,7 +10,8 @@
 
 ### Info
 ```bash
-# Tabela wymiany walut
+# Meta
+- Tabela wymiany walut | EKantorek
 - Czytelny i funkcjonalny interfejs do prezentacji danych dla pracowników kantoru wymiany walut
 
 # Frontend
@@ -28,6 +29,16 @@
 3. Kurs historyczny
 - Pole wyboru waluty i daty
 - Lista ostatnich 14 kursów (domyślnie: USD, aktualny kurs)
+  - Kod waluty
+  - Nazwa waluty
+  - Kurs sprzedaży
+  - Kurs kupna
+  - Średni kurs
+  - Data
+
+4. Stopka
+- Wsparcie technologiczne: Docker, NGINX, PHP-FPM, NBP, Symfony, React, NBP, Boostrap
+- Copyrights 2025 c00ki86
 
 # Backend
 - Dane w aplikacji pobierane z API Symfony (API platform v2.6.x ???)
@@ -36,7 +47,8 @@
 - API wystawione na podstawie danych z plioku Symfony API
 
 # Etag
-- Nowy Etag w Symfony przekazany do NGINXa wymusza na kliencie po walidaci pre-requesta pobranie nowych danych
+"Nowy Etag w Symfony przekazany do NGINX wymusza na kliencie
+przy walidacji pre-requesta pobranie nowych danych"
 
 # Pre-rendering
 "Można zapisać do .html zubdowane oraz wyrenderowane przez Symfony
@@ -63,13 +75,18 @@ kantor nie skupuje tych walut (brak kursu kupna)
 - Niepoprawna data
 
 # Testy
+- Jak działa to po co testować xd
 
 # Jak uruchomić aplikacje?
+- Zrób klona repozytorium
+- Uruchom kontenery przez docker compose
+- Zbudowana aplikacja będzie dostępna pod http://localhost
 - Zapoznaj się z poniższymi wytycznymi
 ```
 
 ### Git config
 ```bash
+
 # Źródłowe repozytorium
 git clone https://github.com/telemedico/recruitment_task_fullstack.git 
 
@@ -185,18 +202,36 @@ request >> NGINX >> PHP-FPM >> Symfony >> response # .php
 
 ### Endpoints
 ```bash
-# routes
+
+# App
+- localhost
 http://localhost
 http://localhost/setup-check # Test
 
-# api/currency
-http://localhost/api/currency?code=USD
+# App API
+- api
+
+- api/currency
 http://localhost/api/currency?code=USD
 
-# api/date
+- api/date
 http://localhost/api/date?date=2025-08-14&code=USD
-http://localhost/api/date?date=2025-08-13&code=USD
+
+- api/test
 http://localhost/api/setup-check # Test
+
+# NBP external API
+- api/tables
+https://api.nbp.pl/api/exchangerates/tables/a?format=json
+https://api.nbp.pl/api/exchangerates/tables/a/last/14?format=json
+https://api.nbp.pl/api/exchangerates/tables/a/2025-08-14?format=json
+
+- api/rates
+https://api.nbp.pl/api/exchangerates/rates/a/usd?format=json
+
+https://api.nbp.pl/api/exchangerates/rates/a/usd/last/1?format=json
+https://api.nbp.pl/api/exchangerates/rates/a/usd/last/14?format=json
+
 ```
 
 ### Command
@@ -204,23 +239,28 @@ http://localhost/api/setup-check # Test
 # Budowanie aplikacji
 npm run build
 
-# Czyszenie cache
+# Lista komend
+php bin/console list
+
+# Lista endpointów
+php bin/console debug:router
+
+# Czyszczenie cache
 php bin/console cache:clear
+php bin/console cache:clear --env=dev
+php bin/console cache:clear --env=prod
 
-# Dump plików w danym katalogu
-php bin/console app:dump-file-content src/App
-php bin/console app:dump-file-content assets/js
+# Zrzut zawartości wszystkich plików z podanego katalogu
+php bin/console config:dump-file-content src/App
+php bin/console config:dump-file-content assets/js
 
-# Pobiera aktualną tabele
-php bin/console nbp:fetch-daily-rates
+# Pobiera aktualne kursy walut, przelicza i zapisuje do plikó
+php bin/console nbp:fetch-latest-currency-rates
 
-# Pobiera tabele z kursami z danego dnia
-php bin/console nbp:fetch-rates A data/date/2025-08-10.json 2025-08-10
+# Pobiera aktualną tabele z kursami walut z NBP, przelicza i zapisuje do plików
+php bin/console nbp:fetch-latest-rates
 
-# Pobiera przeliczone waluty
-php bin/console nbp:fetch-calculated-rates
-
-# Pobiera przeliczone waluty
-php bin/console nbp:calculate-rates
+# Pobiera tabele z kursami z danego dnia, przelicza i zapisuje do pliku [tabela, path, date]
+php bin/console fetch-rate-by-date A data/date/2025-08-15.json 2025-08-15
 
 ```
