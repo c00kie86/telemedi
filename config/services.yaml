@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    nbp_api.base_url: 'https://api.nbp.pl/api/exchangerates'
 
 services:
     # default configuration for services in *this* file
@@ -28,3 +29,20 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Service\NbpApiService:
+        arguments:
+            $baseUrl: '%nbp_api.base_url%'
+
+    App\Service\ExchangeRateRulesService:
+            arguments:
+                $rulesData:
+                    - { code: 'USD', buy_offset: 0.15, sell_offset: 0.11 }
+                    - { code: 'EUR', buy_offset: 0.15, sell_offset: 0.11 }
+                    - { code: 'CZK', buy_offset: null, sell_offset: 0.20 }
+                    - { code: 'IDR', buy_offset: null, sell_offset: 0.20 }
+                    - { code: 'BRL', buy_offset: null, sell_offset: 0.20 }
+
+    GuzzleHttp\Client:
+        arguments:
+            - { base_uri: '%nbp_api.base_url%' }

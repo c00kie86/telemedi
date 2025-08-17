@@ -1,36 +1,54 @@
-# Currency Exchange Table
-Symfony + React.js application with NGINX as FastCGI proxy for PHP-FPM
+<!-- title -->
+<h1 align="center">&#8364;Kantorek</h1>
+
+<!-- background -->
+<div align="center">
+  <img src="assets/img/ekantorek.png" alt="background" />
+</div>
+
+<h2 align="center">Symfony + React.js application with NGINX as FastCGI proxy for PHP-FPM</h2>
 
 ### Info
 ```bash
-# Tabela wymiany walut
-- Czytelny i funkcjonalny interfejs do prezentacja danych dla pracowników kantoru wymiany walut
+# Meta
+- Tabela wymiany walut | EKantorek
+- Czytelny i funkcjonalny interfejs do prezentacji danych dla pracowników kantoru wymiany walut
 
 # Frontend
-1. Aktualne Kursy
+1. Nagłówek
+- Baner .svg 
+
+2. Aktualne Kursy
 - Listy bieżących kursów sprzedawanych walut:
   - Kod waluty
   - Nazwa waluty
-  - Średni kurs
   - Kurs sprzedaży
-  - Kurs kupna (jeżli dotyczy)
-  - Edycja waluty ???
-
-2. Dodaj walutę
-- Pole dodania waluty
-  - Określ kod waluty, różnicę sprzedaży oraz różnice kupna jeżeli dotyczy
-  - Waluta zostanie dodana do sekcji Aktualne Kursy
+  - Kurs kupna
+  - Średni kurs
 
 3. Kurs historyczny
-- Lista ostatnich 14 kursów danej waluty od podanej daty (domyślnie: USD, aktualna data)
-- Pole wyboru (wybierz: walute, datę)
+- Pole wyboru waluty i daty
+- Lista ostatnich 14 kursów (domyślnie: USD, aktualny kurs)
+  - Kod waluty
+  - Nazwa waluty
+  - Kurs sprzedaży
+  - Kurs kupna
+  - Średni kurs
+  - Data
+
+4. Stopka
+- Wsparcie technologiczne: Docker, NGINX, PHP-FPM, NBP, Symfony, React, NBP, Boostrap
+- Copyrights 2025 c00ki86
 
 # Backend
-- Dane w aplikacji pobierane z API Symfony (API platform v2.6.x)
+- Dane w aplikacji pobierane z API Symfony (API platform v2.6.x ???)
 - Dane w API Symfony pobrane z API NBP
-- Dane z API NBP zapisane w pliku .json
-- Dane z pliku przeliczone i wystawoine w Symfony API
-- pre-rendering ??
+- Dane z API NBP przeliczone i zapisane do pliku data/file.json  
+- API wystawione na podstawie danych z plioku Symfony API
+
+# Etag
+"Nowy Etag w Symfony przekazany do NGINX wymusza na kliencie
+przy walidacji pre-requesta pobranie nowych danych"
 
 # Pre-rendering
 "Można zapisać do .html zubdowane oraz wyrenderowane przez Symfony
@@ -56,12 +74,21 @@ kantor nie skupuje tych walut (brak kursu kupna)
 - Nieobsługiwana waluta
 - Niepoprawna data
 
+# Testy
+- Jak działa to po co testować xd
+
 # Jak uruchomić aplikacje?
-- Zapoznaj się z poniższymi wytycznymi
+- Zrób klona repozytorium
+- Uruchom kontenery przez docker compose
+- Zbudowana aplikacja będzie dostępna pod http://localhost
+- Komendy nbp: nie są wywoływane przez CRONa więc dane z repo bedą nieaktualne
+- Wejdź na kontener symfony jeżeli chcesz pobrać dane przez komendy nbp:, a następnie przebuduj aplikacje
+- Zapoznaj się z poniższymi wytycznymi...
 ```
 
 ### Git config
 ```bash
+
 # Źródłowe repozytorium
 git clone https://github.com/telemedico/recruitment_task_fullstack.git 
 
@@ -177,8 +204,65 @@ request >> NGINX >> PHP-FPM >> Symfony >> response # .php
 
 ### Endpoints
 ```bash
-http://localhost
-http://localhost/setup-check
 
-http://localhost/api/setup-check
+# App
+- localhost
+http://localhost
+http://localhost/setup-check # Test
+
+# App API
+- api
+
+- api/currency
+http://localhost/api/currency?code=USD
+
+- api/date
+http://localhost/api/date?date=2025-08-14&code=USD
+
+- api/test
+http://localhost/api/setup-check # Test
+
+# NBP external API
+- api/tables
+https://api.nbp.pl/api/exchangerates/tables/a?format=json
+https://api.nbp.pl/api/exchangerates/tables/a/last/14?format=json
+https://api.nbp.pl/api/exchangerates/tables/a/2025-08-14?format=json
+
+- api/rates
+https://api.nbp.pl/api/exchangerates/rates/a/usd?format=json
+
+https://api.nbp.pl/api/exchangerates/rates/a/usd/last/1?format=json
+https://api.nbp.pl/api/exchangerates/rates/a/usd/last/14?format=json
+
+```
+
+### Command
+```bash
+# Budowanie aplikacji
+npm run build
+
+# Lista komend
+php bin/console list
+
+# Lista endpointów
+php bin/console debug:router
+
+# Czyszczenie cache
+php bin/console cache:clear
+php bin/console cache:clear --env=dev
+php bin/console cache:clear --env=prod
+
+# Zrzut zawartości wszystkich plików z podanego katalogu
+php bin/console config:dump-file-content src/App
+php bin/console config:dump-file-content assets/js
+
+# Pobiera aktualne kursy walut, przelicza i zapisuje do plikó
+php bin/console nbp:fetch-latest-currency-rates
+
+# Pobiera aktualną tabele z kursami walut z NBP, przelicza i zapisuje do plików
+php bin/console nbp:fetch-latest-rates
+
+# Pobiera tabele z kursami z danego dnia, przelicza i zapisuje do pliku [tabela, path, date]
+php bin/console fetch-rate-by-date A data/date/2025-08-15.json 2025-08-15
+
 ```

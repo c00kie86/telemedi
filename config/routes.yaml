@@ -8,9 +8,13 @@ setupcheck:
     path: /api/setup-check
     controller: App\Controller\Api\SetupCheckController::setupCheck
 
-getcurrency:
+currency:
     path: /api/currency
-    controller: App\Controller\Api\CurrencyController::getCurrency
+    controller: App\Controller\Api\CurrencyController::getCurrencyRate
+
+date:
+    path: /api/date
+    controller: App\Controller\Api\CurrencyController::getCurrencyRateTable
 
 index:
     path: /{wildcard}

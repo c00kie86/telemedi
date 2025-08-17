@@ -1,14 +1,6 @@
 {
-	"table": "A",
-	"no": "155/A/NBP/2025",
-	"effectiveDate": "2025-08-12",
-	"rates": [
-		{
-			"currency": "rupia indonezyjska",
-			"code": "IDR",
-			"mid": 0.00022537,
-			"sell": 3.76,
-			"buy": 3.5
-		}
-	]
+    "code": "IDR",
+    "currency": "rupia indonezyjska",
+    "mid": 0.00022682,
+    "sell": 0.2
 }

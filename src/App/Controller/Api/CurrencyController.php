@@ -1,35 +1,67 @@
 <?php
-// src/Controller/Api/CurrencyController.php
+
 namespace App\Controller\Api;
 
+use App\Service\NbpApiService;
+use App\Service\ExchangeRateReadDataService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-// /api/currency?code=usd
 class CurrencyController extends AbstractController
 {
-    public function getCurrency(Request $request): JsonResponse
+    public function __construct(
+        private readonly ContainerBagInterface $params,
+        private readonly NbpApiService $nbpApiService,
+        private readonly ExchangeRateReadDataService $exchangeRateReadDataService
+    ) {}
+
+    public function getCurrencyRate(Request $request): JsonResponse
     {
-        $code = strtolower($request->query->get('code'));
+        $code = strtolower(trim($request->query->get('code')));
 
-        if (!$code) {
-            return $this->json(['error' => 'Brak parametru "?code=usd"'], 400);
+        if (empty($code)) {
+            return $this->json(['error' => 'Brak wymaganego parametru: code'], Response::HTTP_BAD_REQUEST);
         }
 
-        $filePath = $this->getParameter('kernel.project_dir') . "/data/currency/{$code}.json";
+        try {
+            $data = $this->exchangeRateReadDataService->getCurrencyByCode($code);
+            
+            if (null === $data) {
+                return $this->json(['error' => "Plik dla waluty '{$code}' nie istnieje lub dane są niepoprawne"], Response::HTTP_NOT_FOUND);
+            }
 
-        if (!file_exists($filePath)) {
-            return $this->json(['error' => "Plik dla waluty '{$code}' nie istnieje"], 404);
+            return $this->json($data, Response::HTTP_OK);
+        } catch (\InvalidArgumentException $e) {
+            return $this->json(['error' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
+        } catch (\Exception $e) {
+            return $this->json(['error' => 'Wystąpił błąd serwera.'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function getCurrencyRateTable(Request $request): JsonResponse
+    {
+        $code = strtoupper(trim($request->query->get('code')));
+        $date = trim($request->query->get('date'));
+        
+        if (empty($code) || empty($date)) {
+            return $this->json(['error' => 'Brak wymaganych parametrów: code i date'], Response::HTTP_BAD_REQUEST);
         }
 
-        $json = file_get_contents($filePath);
-        $data = json_decode($json, true);
+        try {
+            $rate = $this->exchangeRateReadDataService->getTabelByDate($date, $code);
+            
+            if (null === $rate) {
+                return $this->json(['error' => "Brak danych dla waluty {$code} w dniu {$date}"], Response::HTTP_NOT_FOUND);
+            }
 
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            return $this->json(['error' => 'Nieprawidłowy format JSON'], 500);
+            return $this->json($rate, Response::HTTP_OK);
+        } catch (\InvalidArgumentException $e) {
+            return $this->json(['error' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
+        } catch (\Exception $e) {
+            return $this->json(['error' => 'Wystąpił błąd serwera.'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-
-        return $this->json($data);
     }
 }
