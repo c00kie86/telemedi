@@ -60,7 +60,7 @@ class ExchangeRateProcessService
         $calculatedRates = $this->processRates($tableDto)->getRates();
         foreach ($calculatedRates as $rate) {
             $filename = sprintf('data/currency/%s.json', strtolower($rate->getCode()));
-            $this->exchangeRateWriteDataService->saveSingleRateToFile($rate, $filename);
+            $this->exchangeRateWriteDataService->saveCurrencyRateToFile($rate, $filename);
         }
     }
 }
